@@ -1,8 +1,49 @@
-# Metric Mindset
+<!--
+PENDIENTE: reemplazar la imagen de abajo por una captura real de la app de
+Streamlit (assets/demo.png) — ver MovieTime/CreditFlow como referencia de formato.
+Borrar este comentario antes de commitear.
+-->
+
+<div align="center">
+
+# 🛒 Metric Mindset
 
 **Sistema de scoring de intención de compra y motor de recomendaciones para e-commerce**, construido end-to-end: EDA → modelado calibrado → API → app interactiva → deploy.
 
-## El problema, en una escena 🎬
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![LightGBM](https://img.shields.io/badge/LightGBM-02569B?style=flat-square&logo=lightgbm&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)
+![MLflow](https://img.shields.io/badge/MLflow-0194E2?style=flat-square&logo=mlflow&logoColor=white)
+
+[![Demo](https://img.shields.io/badge/Demo-Ver_en_vivo-2ea44f?style=flat-square&logo=streamlit&logoColor=white)](https://proyecto-final-henry-cgwmikv2ykhrmpytpuv8hy.streamlit.app/)
+
+</div>
+
+<br>
+
+<div align="center">
+  <img src="assets/demo.png" alt="Vista previa de la app de Metric Mindset" width="720">
+</div>
+
+<br>
+
+## 📑 Contenido
+
+- [El problema, en una escena](#-el-problema-en-una-escena)
+- [Mi rol y aportes](#-mi-rol-y-aportes-juan-manuel--data-scientist)
+- [Demo en vivo](#-demo-en-vivo)
+- [Qué hace](#-qué-hace)
+- [Instalación y ejecución](#-instalación-y-ejecución)
+- [Cómo está construido](#-cómo-está-construido)
+- [Recursos útiles](#-recursos-útiles)
+- [Próximos pasos](#-próximos-pasos)
+- [Licencia](#-licencia)
+- [Equipo](#-equipo)
+
+---
+
+## 🎬 El problema, en una escena
 
 Un usuario entra a una tienda online, navega ocho minutos, mira cinco productos, agrega uno al carrito... y se va sin comprar. Pasa en **8 de cada 10 sesiones**, y el negocio no se entera hasta que ya es tarde para intervenir.
 
