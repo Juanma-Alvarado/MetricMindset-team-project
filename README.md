@@ -6,6 +6,15 @@
 
 ---
 
+## 🚀 Demo en vivo
+
+- **Aplicación (Streamlit):** [proyecto-final-henry-cgwmikv2ykhrmpytpuv8hy.streamlit.app](https://proyecto-final-henry-cgwmikv2ykhrmpytpuv8hy.streamlit.app/)
+- **API (FastAPI):** desplegada en Render (ver `render.yaml`)
+
+> La app corre en el plan gratuito de Streamlit Community Cloud y puede tardar entre 30 y 60 segundos en "despertar" si nadie la usó recientemente.
+
+---
+
 ## Descripción del proyecto 📌
 
 **Metric Mindset** es una solución de analítica predictiva aplicada al comercio electrónico que busca transformar el comportamiento de navegación de los usuarios en **predicciones accionables y recomendaciones de negocio**.
@@ -959,6 +968,22 @@ Como evolución futura de la solución se plantean:
 | Luis | Data Engineer & Data Analytics |
 | Juan Manuel | Data Scientist |
 | Lucas Bottino | Data Scientist |
+
+### 🙋 Mi rol en el proyecto (Juan Manuel — Data Scientist)
+
+Trabajé de punta a punta en el pipeline de datos, el modelado y la puesta en producción del sistema. Según el historial de commits del repositorio, mi participación incluyó:
+
+- **Ingesta y validación de datos** — tipado y validación de rutas en `data_loader.py`.
+- **EDA** — desarrollo de mi propio análisis exploratorio y consolidación del EDA final combinando mi notebook con el de un compañero de equipo (`01_eda.ipynb` + `01_eda_by_julian.ipynb` → `EDA.ipynb`).
+- **ETL** — pipeline de limpieza, validación y generación del dataset procesado (`ETL.ipynb`).
+- **Feature Engineering** — variables derivadas del comportamiento de navegación (`features.py`, `feature_enginering.ipynb`).
+- **Modelado** — pipeline del MVP (Sprint 1) y, en el Sprint 2, tuning de hiperparámetros con Optuna y tratamiento avanzado del desbalance de clases (SMOTE, `class_weight`, calibración de probabilidades) (`modeling_mvp.ipynb`, `modeling_avanzado.ipynb`, `metrics.py`).
+- **Motor de recomendaciones** — lógica de asignación de acciones de negocio, función `asignar_accion()` (`recommender.py`).
+- **API** — implementación completa de los endpoints de FastAPI (`/predict`, `/health`) y conexión de la demo al modelo real, reemplazando datos mock (`api/main.py`, `routes.py`, `schemas.py`, `inference.py`).
+- **Aplicación Streamlit** — conexión de `demo_app.py` a la API real y ajustes de estabilidad (timeout ante el cold start de Render).
+- **MLOps y despliegue** — pipeline de CI con GitHub Actions, tracking de experimentos con MLflow, y configuración del despliegue (`render.yaml`, secrets de Streamlit Cloud).
+- **Testing** — smoke tests automatizados de la API (`test_api_smoke.py`).
+- **Documentación** — gran parte de este README.
 
 ---
 
