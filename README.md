@@ -1,48 +1,33 @@
-# Metric Mindset 🚀
+# Metric Mindset
 
-## Scoring de Intención de Compra y Motor de Recomendaciones para E-Commerce
+## El problema, en una escena 🎬
 
-> **Transformando sesiones anónimas de e-commerce en conversiones reales mediante analítica predictiva.**
+Un usuario entra a una tienda online. Navega ocho minutos, mira cinco productos, agrega uno al carrito... y se va sin comprar.
+
+Pasa en **8 de cada 10 sesiones**. Y el negocio no tiene forma de saberlo hasta que ya es tarde: la sesión terminó y la oportunidad de intervenir —un descuento, una recomendación, un recordatorio— se perdió con ella.
+
+**Metric Mindset** nace para responder una pregunta simple: *¿podemos anticipar esa decisión mientras la sesión todavía está ocurriendo, y decirle al negocio qué hacer al respecto?*
+
+## La solución 💡
+
+Un sistema que **lee el comportamiento de navegación en tiempo real** y lo convierte en una decisión de negocio, en tres pasos:
+
+1. 📊 **Analiza** cómo se está comportando la sesión (páginas vistas, tiempo, rebotes).
+2. 🎯 **Estima** la probabilidad de que termine en compra — un score de 0 a 1.
+3. ⚡ **Recomienda** una acción concreta (cross-selling, retención, o no intervenir) y la expone vía API para que cualquier sistema del negocio pueda consumirla.
+
+Todo esto corriendo detrás de una API en FastAPI y una interfaz interactiva en Streamlit, con el ciclo de vida del modelo (tracking, tuning, CI/CD) resuelto con MLflow y GitHub Actions.
+
+**Stack:** Python · Pandas/NumPy · Scikit-Learn · LightGBM/XGBoost/CatBoost · Optuna · FastAPI · Streamlit · MLflow · Power BI · GitHub Actions
 
 ---
 
-## 🚀 Demo en vivo
+## 🚀 Ver la solución en acción
 
 - **Aplicación (Streamlit):** [proyecto-final-henry-cgwmikv2ykhrmpytpuv8hy.streamlit.app](https://proyecto-final-henry-cgwmikv2ykhrmpytpuv8hy.streamlit.app/)
 - **API (FastAPI):** desplegada en Render (ver `render.yaml`)
 
 > La app corre en el plan gratuito de Streamlit Community Cloud y puede tardar entre 30 y 60 segundos en "despertar" si nadie la usó recientemente.
-
----
-
-## Descripción del proyecto 📌
-
-**Metric Mindset** es una solución de analítica predictiva aplicada al comercio electrónico que busca transformar el comportamiento de navegación de los usuarios en **predicciones accionables y recomendaciones de negocio**.
-
-El proyecto parte de una problemática habitual en e-commerce: una gran proporción de las sesiones de navegación no termina en una compra.
-
-A partir del análisis de comportamiento de las sesiones, desarrollamos un sistema capaz de:
-
-1. Analizar el comportamiento de navegación de cada sesión.
-2. Estimar la probabilidad de que dicha sesión termine en una compra.
-3. Clasificar la intención de compra utilizando umbrales de negocio.
-4. Activar una recomendación de acción según el nivel de intención.
-5. Exponer la predicción mediante una API.
-6. Visualizar e interactuar con el sistema mediante una aplicación desarrollada en Streamlit.
-
-La solución combina:
-
-- Data Analytics
-- Machine Learning
-- Feature Engineering
-- Model Selection
-- Hyperparameter Tuning
-- Probability Calibration
-- Recommendation Logic
-- FastAPI
-- Streamlit
-- MLflow
-- Testing y CI/CD
 
 ---
 
@@ -902,6 +887,8 @@ Estas variables fueron especialmente relevantes para comprender y modelar el com
 ---
 
 ## Conclusiones 🎯
+
+Volvamos a esa sesión del principio: usuario nuevo, ocho minutos navegando, un producto en el carrito. Con el modelo calibrado de Metric Mindset, esa sesión ya no se pierde en silencio — llega a **cross-selling** con un 86% de probabilidad real de conversión, o a **retención** antes de que decida irse. Esa es la diferencia entre reaccionar y anticipar.
 
 **Metric Mindset** demuestra cómo un problema de negocio puede abordarse mediante un flujo completo de Data Science:
 
