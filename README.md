@@ -34,8 +34,11 @@ Borrar este comentario antes de commitear.
 - [Mi rol y aportes](#-mi-rol-y-aportes-juan-manuel--data-scientist)
 - [Demo en vivo](#-demo-en-vivo)
 - [Qué hace](#-qué-hace)
+- [Pipeline de datos y modelado](#-pipeline-de-datos-y-modelado)
 - [Instalación y ejecución](#-instalación-y-ejecución)
+- [Ejemplo de uso de la API](#-ejemplo-de-uso-de-la-api)
 - [Cómo está construido](#-cómo-está-construido)
+- [Insights de negocio](#-insights-de-negocio)
 - [Recursos útiles](#-recursos-útiles)
 - [Próximos pasos](#-próximos-pasos)
 - [Licencia](#-licencia)
@@ -88,7 +91,38 @@ Lo que más me dejó el proyecto: la mitad del trabajo de un modelo "bueno" no e
 | 30% – 70% | Sin acción | 44,9% |
 | < 30% | Retención | 4,9% |
 
-**Resultado del modelo final** (LightGBM + Optuna + calibración sigmoid, sobre test set): ROC-AUC 0,938 · PR-AUC 0,756 · Precision@10% 80% (de cada 10 sesiones priorizadas, 8 terminan comprando).
+**Resultado del modelo final** (LightGBM + Optuna + calibración sigmoid, sobre test set): ROC-AUC 0,938 · PR-AUC 0,756.
+
+**Evaluación por ranking** — si el negocio solo puede intervenir sobre una porción de las sesiones, el modelo permite priorizar cuáles:
+
+| Top K | Precision@K | Recall@K |
+|---:|---:|---:|
+| 5% | 86% | 27% |
+| 10% | 80% | 51% |
+| 20% | 60% | 77% |
+| 30% | 47% | 91% |
+
+Con capacidad para intervenir sobre el 10% de las sesiones, ~8 de cada 10 seleccionadas terminan en compra, capturando la mitad de todas las ventas del período — permite dimensionar campañas según presupuesto.
+
+---
+
+## 🔬 Pipeline de datos y modelado
+
+**EDA:** sin valores nulos, pero con 125 duplicados efectivos. Los outliers detectados por IQR se conservaron a propósito — representan comportamientos reales de navegación, no errores de carga. Variables más correlacionadas con `Revenue`: `PageValues`, `ExitRates`, `ProductRelated`, `Month`.
+
+**Feature engineering** — variables derivadas del comportamiento de sesión:
+
+| Feature | Qué mide |
+|---|---|
+| `duracion_total` | Suma del tiempo en páginas administrativas, informativas y de producto |
+| `paginas_totales` | Cantidad total de páginas visitadas en la sesión |
+| `duracion_promedio_pagina` | Tiempo promedio de navegación por página |
+| `proporcion_paginas_producto` | Proporción de la sesión dedicada a páginas de producto |
+| `es_visitante_recurrente` | Derivada de `VisitorType` |
+
+**Preprocesamiento:** split estratificado 80/20 (9.764 sesiones train / 2.441 test, `random_state=42`), `OneHotEncoder` para categóricas y `StandardScaler` para numéricas — ambos ajustados solo sobre train para evitar data leakage.
+
+**De MVP a modelo final:** el Sprint 1 comparó Regresión Logística, Random Forest y XGBoost (Random Forest ganó con ROC-AUC 0,924). El Sprint 2 llevó esa base a LightGBM + Optuna + calibración sigmoid — la combinación que terminó en producción.
 
 ---
 
@@ -108,6 +142,36 @@ Los artefactos del modelo ya están versionados en el repo — no hace falta ree
 
 ---
 
+## 🔌 Ejemplo de uso de la API
+
+```http
+POST /predict
+```
+
+```json
+{
+  "ProductRelated": 25,
+  "ProductRelated_Duration": 620.5,
+  "BounceRates": 0.01,
+  "ExitRates": 0.02,
+  "PageValues": 35.0,
+  "Month": "Nov",
+  "VisitorType": "Returning_Visitor",
+  "Weekend": false
+}
+```
+
+```json
+{
+  "purchase_probability": 0.83,
+  "recommended_action": "cross_selling"
+}
+```
+
+Contrato completo y documentación interactiva (Swagger) en `/docs` una vez levantada la API.
+
+---
+
 ## 🏗️ Cómo está construido
 
 | Capa | Tecnologías |
@@ -119,6 +183,12 @@ Los artefactos del modelo ya están versionados en el repo — no hace falta ree
 | MLOps | MLflow, GitHub Actions, deploy en Render + Streamlit Cloud |
 
 **Dataset:** *Online Shoppers Intention* (UCI Machine Learning Repository) — 12.330 sesiones, fuerte desbalance (84,5% no compra). Tras limpieza: 12.205 filas × 30 columnas, incluyendo features derivadas de navegación.
+
+**Arquitectura:**
+
+```text
+Sesión → Feature Engineering → LightGBM calibrado → Probabilidad → Motor de recomendación → Acción
+```
 
 **La pieza clave del modelo** — calibrar las probabilidades para que los umbrales de negocio sean confiables:
 
@@ -135,6 +205,14 @@ data/           → raw, processed, models
 tests/          → smoke tests de la API
 demo_app.py     → app Streamlit
 ```
+
+---
+
+## 💡 Insights de negocio
+
+- **Estacionalidad:** el volumen de compras crece hacia fin de año, con picos en noviembre y diciembre — útil para planificar campañas, stock e infraestructura.
+- **Usuarios nuevos vs. recurrentes:** los nuevos convierten más que los recurrentes, aunque estos últimos son la mayoría del tráfico — abre una oportunidad concreta de retención.
+- **Señales más fuertes:** `PageValues`, `ExitRates` y `ProductRelated_Duration` son, de lejos, las variables más predictivas de intención de compra.
 
 ---
 
