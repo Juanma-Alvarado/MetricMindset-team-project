@@ -1,9 +1,3 @@
-<!--
-PENDIENTE: reemplazar la imagen de abajo por una captura real de la app de
-Streamlit (assets/demo.png) — ver MovieTime/CreditFlow como referencia de formato.
-Borrar este comentario antes de commitear.
--->
-
 <div align="center">
 
 # 🛒 Metric Mindset
