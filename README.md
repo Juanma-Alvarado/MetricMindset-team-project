@@ -4,6 +4,8 @@
 
 **Sistema de scoring de intención de compra y motor de recomendaciones para e-commerce**, construido end-to-end: EDA → modelado calibrado → API → app interactiva → deploy.
 
+*Proyecto final en equipo (4 personas) del bootcamp de Ciencia de Datos de Henry — mi rol y aportes específicos están documentados en [Mi rol y aportes](#-mi-rol-y-aportes-juan-manuel--data-scientist).*
+
 ![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
 ![LightGBM](https://img.shields.io/badge/LightGBM-02569B?style=flat-square&logo=lightgbm&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
@@ -233,7 +235,7 @@ Proyecto desarrollado con fines académicos como parte del proyecto final de Cie
 | **Juan Manuel** | Data Scientist |
 | Lucas Bottino | Data Scientist |
 
-Repo original del equipo: [lucasbottino9/Proyecto-Final-Henry](https://github.com/lucasbottino9/Proyecto-Final-Henry) — este repositorio es mi fork, con mi aporte documentado arriba.
+Repo original del equipo: [lucasbottino9/Proyecto-Final-Henry](https://github.com/lucasbottino9/Proyecto-Final-Henry) — este repositorio es mi versión individual del proyecto, con mi aporte documentado arriba.
 
 ---
 
